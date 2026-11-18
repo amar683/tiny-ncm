@@ -2,10 +2,42 @@
 
 ## Summary
 - **Type:** NCM (coarse-to-fine, block-wise) language model for tool use, trained from scratch.
+- **Method:** Next-Concept Modeling, Kumbong, Khare et al., 2026 ([arXiv:2610.14162](https://arxiv.org/abs/2610.14162)); see below.
 - **Size:** 36.4M parameters: generator 20.9M (d=384, 8 layers, 3 query heads / 1 KV head) and multiscale residual VQ
   tokenizer 15.5M (5 levels, 1024-entry codebooks). Byte-level BPE vocabulary of 16,384. Context 4096.
 - **Checkpoint:** `runs/task6` (released as `tiny-ncm.pt`, fp32, 146 MB). Code: https://github.com/amar683/tiny-ncm (MIT).
 - **Hardware:** one MacBook (Apple M5, 24 GB), PyTorch MPS, bf16. About 12 hours of training in total (VQ tokenizer 1.3 h, generator 10.5 h).
+
+## Method: the NCM paper
+
+This model is an independent, from-scratch implementation of **Next-Concept Modeling (NCM)** from
+
+> **Next-Concept Modeling: Fast, Parallel Coarse-to-Fine Text Generation**
+> Hermann Kumbong, Ishan S. Khare, Iddah Mlauzi, Andrew Woen, Charles Ding, E. Kelly Buchanan, Simran Arora, Azalia Mirhoseini, Christopher Ré
+> Stanford University and Together AI, 2026. [arXiv:2610.14162](https://arxiv.org/abs/2610.14162) · official code: [HazyResearch/ncm](https://github.com/HazyResearch/ncm)
+
+All credit for the method goes to the authors. This project is not affiliated with them, and no code was taken from the official repository.
+
+**From the paper:** a multiscale residual VQ-VAE turns text into coarse-to-fine levels of discrete codes; a transformer generates
+one level at a time, predicting all codes of a level in parallel; nested dropout in the tokenizer; conditioning (code) corruption
+and per-level loss weighting when training the generator.
+
+**Changed or added here:** text is split into 32-token blocks that are generated one after another with a KV cache (each block
+coarse-to-fine over 5 levels), so a chat can grow to 4096 tokens; level positions attend to a 128-token window of context to fit
+Apple-silicon speed; Muon optimizer; a small size (36M) trained in about 12 hours on one MacBook; chat and tool-use training,
+plus the app-side checks in `assistant/`.
+
+If you use this, please cite the paper:
+
+```bibtex
+@article{kumbong2026ncm,
+  title   = {Next-Concept Modeling: Fast, Parallel Coarse-to-Fine Text Generation},
+  author  = {Kumbong, Hermann and Khare, Ishan S. and Mlauzi, Iddah and Woen, Andrew and Ding, Charles and
+             Buchanan, E. Kelly and Arora, Simran and Mirhoseini, Azalia and R{\'e}, Christopher},
+  journal = {arXiv preprint arXiv:2610.14162},
+  year    = {2026}
+}
+```
 
 ## Intended use
 A personal assistant that turns everyday requests into tool calls (alarms, reminders, timers, calendar, read-only Gmail,

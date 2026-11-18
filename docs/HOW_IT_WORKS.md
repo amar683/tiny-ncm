@@ -1,5 +1,7 @@
 # tiny-ncm: how it works, what we changed, and how it is trained
 
+> Method: **Next-Concept Modeling** (Kumbong, Khare et al., Stanford & Together AI, 2026, [arXiv:2610.14162](https://arxiv.org/abs/2610.14162)). This is an independent implementation; all credit for the method goes to the authors.
+
 A from-scratch **NCM** (coarse-to-fine) everyday assistant, ~36M parameters, trained only on a
 MacBook M5. This page explains the idea, walks through the code with small snippets, and lists
 every change we made along the way and why.
