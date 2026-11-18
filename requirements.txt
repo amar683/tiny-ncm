@@ -1,0 +1,11 @@
+# tiny-ncm, tested with Python 3.12 on macOS (Apple silicon, MPS)
+torch>=2.4
+numpy>=1.26
+tokenizers>=0.19
+dateparser>=1.2
+# Gmail (optional, read-only)
+google-api-python-client>=2.100
+google-auth-oauthlib>=1.2
+# only for re-building the training data
+datasets>=2.19
+huggingface_hub>=0.23

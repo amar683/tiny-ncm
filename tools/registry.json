@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "tools": [
+    {"name": "set_alarm", "desc": "set an alarm", "args": {"time": "str", "label": "str?"}, "platforms": ["mac", "windows", "linux", "android", "ios"]},
+    {"name": "set_reminder", "desc": "create a reminder", "args": {"text": "str", "time": "str?"}, "platforms": ["mac", "windows", "linux", "android", "ios"]},
+    {"name": "set_timer", "desc": "start a countdown timer", "args": {"duration": "str", "label": "str?"}, "platforms": ["mac", "windows", "linux", "android", "ios"]},
+    {"name": "calendar_add", "desc": "add a calendar event", "args": {"title": "str", "time": "str", "duration": "str?"}, "platforms": ["mac", "android", "ios"]},
+    {"name": "calendar_list", "desc": "list calendar events", "args": {"day": "str"}, "platforms": ["mac", "android", "ios"]},
+    {"name": "list_emails", "desc": "list recent emails", "args": {"query": "str?", "n": "int?"}, "platforms": ["mac", "windows", "linux", "android", "ios"]},
+    {"name": "read_email", "desc": "read one email", "args": {"id": "str"}, "platforms": ["mac", "windows", "linux", "android", "ios"]},
+    {"name": "draft_email", "desc": "save an email draft", "args": {"to": "str", "subject": "str", "body": "str"}, "platforms": ["mac", "windows", "linux", "android", "ios"]},
+    {"name": "send_email", "desc": "send an email", "args": {"to": "str", "subject": "str", "body": "str"}, "platforms": ["mac", "windows", "linux", "android", "ios"], "confirm": true},
+    {"name": "lookup", "desc": "look up a topic in an encyclopedia", "args": {"topic": "str"}, "platforms": ["mac", "windows", "linux", "android", "ios"]},
+    {"name": "web_search", "desc": "search the web", "args": {"query": "str"}, "platforms": ["mac", "windows", "linux", "android", "ios"]},
+    {"name": "weather", "desc": "get the weather", "args": {"location": "str?", "when": "str?"}, "platforms": ["mac", "windows", "linux", "android", "ios"]},
+    {"name": "notes_add", "desc": "save a note", "args": {"text": "str"}, "platforms": ["mac", "windows", "linux", "android", "ios"]},
+    {"name": "notes_search", "desc": "search saved notes", "args": {"query": "str"}, "platforms": ["mac", "windows", "linux", "android", "ios"]},
+    {"name": "calculator", "desc": "evaluate arithmetic", "args": {"expression": "str"}, "platforms": ["mac", "windows", "linux", "android", "ios"]},
+    {"name": "get_time", "desc": "current time in a place", "args": {"place": "str"}, "platforms": ["mac", "windows", "linux", "android", "ios"]},
+    {"name": "open_app", "desc": "open an app", "args": {"app": "str"}, "platforms": ["mac", "windows", "android", "ios"]},
+    {"name": "call", "desc": "phone call a contact", "args": {"contact": "str"}, "platforms": ["android", "ios"], "confirm": true},
+    {"name": "sms", "desc": "send a text message", "args": {"to": "str", "message": "str"}, "platforms": ["android", "ios"], "confirm": true}
+  ]
+}
